@@ -1,7 +1,9 @@
 
-using WebApplication1.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Tracker.Data;
+using Tracker.Extensions;
 
-namespace WebApplication1
+namespace Tracker
 {
     public class Program
     {
@@ -12,12 +14,20 @@ namespace WebApplication1
             // Add services to the container.
 
             builder.Services.AddAppServices();
+            builder.Services.AddApiServices();
             builder.Services.AddDatabaseServices();
-            builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<MyDbContext>>();
+
+                var db = factory.CreateDbContext();
+                db.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

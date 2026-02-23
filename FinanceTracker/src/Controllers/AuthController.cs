@@ -1,14 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTO;
+using Tracker.DTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace WebApplication1.Controllers
+namespace Tracker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
+
+        public AuthController()
+        {
+
+        }
 
         // GET: api/<AuthController>
         [HttpGet]
@@ -28,7 +33,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public void Post([FromBody]AuthDto auth)
         {
-
+            var username = auth.Username;
+            var email = auth.Email;
+            var password = auth.Password;
+            
 
 
         }
@@ -37,12 +45,14 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/<AuthController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+
         }
     }
 }
