@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataGateway.Data;
+using DataGateway.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Tracker.Data;
 
 namespace DataGateway.Services
 {
-    public class DbService
+    public class DbService: IDbService
     {
 
         private MyDbContext _dbContext;
@@ -13,11 +15,10 @@ namespace DataGateway.Services
             _dbContext = dbContext;
         }
 
-        public async Task<DateTime> GetSnapshot()
+        public async Task<List<LeaderboardSnapshot>> ListSnapshots()
         {
-            var snapshot = await _dbContext.LeaderboardSnapshots.Where(s => s.Id == 5).FirstOrDefaultAsync();
-
-            return snapshot.DatePulled;
+            var snapshots = await _dbContext.LeaderboardSnapshots.ToListAsync();
+            return snapshots;
         }
 
     }
