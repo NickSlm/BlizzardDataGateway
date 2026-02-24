@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataGateway.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tracker.Data
 {
@@ -10,7 +11,8 @@ namespace Tracker.Data
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<LeaderboardSnapshot> LeaderboardSnapshots { get; set; }
+        public DbSet<DataGateway.Data.LeaderboardEntry> LeaderboardEntry { get; set; } = default!;
 
     }
 }

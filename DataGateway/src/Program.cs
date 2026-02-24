@@ -21,14 +21,6 @@ namespace Tracker
 
             var app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<MyDbContext>>();
-
-                var db = factory.CreateDbContext();
-                db.Database.Migrate();
-            }
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

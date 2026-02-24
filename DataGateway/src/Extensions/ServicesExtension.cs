@@ -3,6 +3,7 @@ using Tracker.Data;
 using Tracker.Services.Interfaces;
 using Tracker.Settings;
 using Tracker.Services;
+using DataGateway.Services;
 
 namespace Tracker.Extensions
 {
@@ -12,6 +13,7 @@ namespace Tracker.Extensions
         public static void AddAppServices(this IServiceCollection Services)
         { 
             Services.AddSingleton<IAuthService, AuthService>();
+            Services.AddScoped<DbService>();
             Services.AddOptions<JwtSettings>().BindConfiguration("JwtSettings");
         }
         public static void AddDatabaseServices(this IServiceCollection Services)
