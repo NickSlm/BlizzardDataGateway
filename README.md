@@ -6,46 +6,46 @@ The API acts as a controlled gateway between clients and the snapshot database.
 
 **Architecture**
 
-Controllers expose specific endpoints
+- Controllers expose specific endpoints
 
-Business logic layer handles data access rules
+- Business logic layer handles data access rules
 
-Entity Framework Core for database interaction
+- Entity Framework Core for database interaction
 
-DTOs for safe data exposure
+- DTOs for safe data exposure
 
 **What Users Can Do**
 
 Depending on granted access, users can:
 
-Retrieve snapshot metadata
+- Retrieve snapshot metadata
 
-Pull character data from specific snapshots
+- Pull character data from specific snapshots
 
-Access filtered or limited datasets
+- Access filtered or limited datasets
 
-Query historical data
+- Query historical data
 
 **Data Control**
 
 The API:
 
-Controls which data is exposed
+- Controls which data is exposed
 
-Prevents direct database access
+- Prevents direct database access
 
-Allows extension for authentication/authorization
+- Allows extension for authentication/authorization
 
-Can be extended with role-based permissions
+- Can be extended with role-based permissions
 
 **Tech Stack**
 
-ASP.NET Core Web API
+- ASP.NET Core Web API
 
-Entity Framework Core
+- Entity Framework Core
 
-SQL Server / Relational DB
+- SQL Server / Relational DB
 
-RESTful Architecture
+- RESTful Architecture
 
-Dependency Injection
+- Dependency Injection
