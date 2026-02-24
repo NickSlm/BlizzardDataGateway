@@ -6,6 +6,6 @@ namespace DataGateway.Services.Interfaces
     {
 
         Task<List<LeaderboardSnapshot>> ListSnapshots();
-
+        Task<LeaderboardSnapshot> GetSnapshotByDate(DateTime date);
     }
 }

@@ -21,7 +21,7 @@ namespace DataGateway.Controllers
 
         // GET: api/<LeaderboardController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LeaderboardSnapshotDto>>> Get()
+        public async Task<ActionResult<IEnumerable<LeaderboardSnapshotDto>>> GetSnapshots()
         {
 
             var snapshots = await _dbService.ListSnapshots();
@@ -37,28 +37,24 @@ namespace DataGateway.Controllers
         }
 
         // GET api/<LeaderboardController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{date}")]
+        public async Task<ActionResult<IEnumerable<LeaderboardSnapshotDto>>> GetSnapshotByDate(DateTime date)
         {
-            return "value";
+
+            var snapshot = await _dbService.GetSnapshotByDate(date);
+
+            var dtos = new LeaderboardSnapshotDto
+            {
+                Id = snapshot.Id,
+                DatePulled = snapshot.DatePulled
+            };
+
+            return Ok(dtos);
+            
+
         }
 
-        // POST api/<LeaderboardController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
 
-        // PUT api/<LeaderboardController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
 
-        // DELETE api/<LeaderboardController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
