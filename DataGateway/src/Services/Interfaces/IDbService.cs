@@ -7,5 +7,7 @@ namespace DataGateway.Services.Interfaces
 
         Task<List<LeaderboardSnapshot>> ListSnapshots();
         Task<LeaderboardSnapshot> GetSnapshotByDate(DateTime date);
+        Task<List<LeaderboardEntry>> GetSnapshotEntries(int snapshotId);
+        Task<LeaderboardEntry> GetCharacter(string characterName);
     }
 }

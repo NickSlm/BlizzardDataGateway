@@ -1,5 +1,8 @@
-﻿namespace DataGateway.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DataGateway.Data
 {
+    [Index(nameof(SnapshotId))]
     public class LeaderboardEntry
     {
         public int Id { get; set; }
@@ -10,7 +13,6 @@
         public int Played { get; set; }
         public int Won { get; set; }
         public int Lost { get; set; }
-
         public int SnapshotId { get; set; }
         public LeaderboardSnapshot Snapshot { get; set; }
     }

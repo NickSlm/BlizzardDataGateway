@@ -32,11 +32,10 @@ namespace DataGateway.Controllers
                 DatePulled = s.DatePulled
             });
 
-
             return Ok(dtos);
         }
 
-        // GET api/<LeaderboardController>/5
+        // GET api/<LeaderboardController>/YY-MM-DD
         [HttpGet("{date}")]
         public async Task<ActionResult<IEnumerable<LeaderboardSnapshotDto>>> GetSnapshotByDate(DateTime date)
         {
@@ -50,11 +49,6 @@ namespace DataGateway.Controllers
             };
 
             return Ok(dtos);
-            
-
         }
-
-
-
     }
 }
