@@ -39,6 +39,12 @@ namespace DataGateway.Controllers
         public async Task<ActionResult<LeaderboardEntriesDto>> GetCharacter(string characterName)
         {
             var character = await _dbService.GetCharacter(characterName);
+
+            if (character == null)
+            {
+                return NotFound();
+            }
+
             var dto = new LeaderboardEntriesDto
             {
                 CharacterName = character.CharacterName,
@@ -48,6 +54,7 @@ namespace DataGateway.Controllers
                 Rank = character.Rank,
                 Rating = character.Rating
             };
+
 
             return Ok(dto);
 

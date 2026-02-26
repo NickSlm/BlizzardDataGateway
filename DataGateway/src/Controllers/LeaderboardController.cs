@@ -26,6 +26,11 @@ namespace DataGateway.Controllers
 
             var snapshots = await _dbService.ListSnapshots();
 
+            if (snapshots == null)
+            {
+                return NotFound();
+            }
+
             var dtos = snapshots.Select(s => new LeaderboardSnapshotDto
             {
                 Id = s.Id,
@@ -41,6 +46,10 @@ namespace DataGateway.Controllers
         {
 
             var snapshot = await _dbService.GetSnapshotByDate(date);
+            if (snapshot == null)
+            {
+                return NotFound();
+            }
 
             var dtos = new LeaderboardSnapshotDto
             {
