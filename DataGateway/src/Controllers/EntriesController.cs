@@ -4,13 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+
+
+
+
+
 namespace DataGateway.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class EntriesController : ControllerBase
     {
-
         private IDbService _dbService;
         public EntriesController(IDbService dbService)
         {
@@ -31,6 +36,8 @@ namespace DataGateway.Controllers
                 Rating = e.Rating
 
             });
+
+
 
             return Ok(dtos);
         }
@@ -59,6 +66,7 @@ namespace DataGateway.Controllers
             return Ok(dto);
 
         }
+
 
 
     }

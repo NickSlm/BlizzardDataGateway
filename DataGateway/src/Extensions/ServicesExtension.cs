@@ -5,6 +5,7 @@ using Tracker.Settings;
 using Tracker.Services;
 using DataGateway.Services;
 using DataGateway.Services.Interfaces;
+using StackExchange.Redis;
 
 namespace Tracker.Extensions
 {
@@ -23,6 +24,14 @@ namespace Tracker.Extensions
                 var configuration = serviceProvider.GetRequiredService<IConfiguration>();
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
+            Services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var connectionString = configuration["Redis:ConnectionString"];
+
+                return ConnectionMultiplexer.Connect(connectionString);
+            });
+
 
         }
         public static void AddApiServices(this IServiceCollection Services)
