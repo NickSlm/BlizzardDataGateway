@@ -61,13 +61,26 @@ namespace DataGateway.Controllers
                 Rank = character.Rank,
                 Rating = character.Rating
             };
-
-
             return Ok(dto);
-
         }
 
+        [HttpGet("/leaderboard/top10")]
+        public async Task<ActionResult<IEnumerable<LeaderboardEntriesDto>>> GetTop10Players()
+        {
 
+            var top10 = await _dbService.GetTop10Entries();
+            var dtos = top10.Select(e => new LeaderboardEntriesDto
+            {
+                CharacterName = e.CharacterName,
+                Rating = e.Rating,
+                Played = e.Played,
+                Won = e.Won,
+                Lost = e.Lost,
+                Rank = e.Rank
+            });
+
+            return Ok(dtos);
+        }
 
     }
 }
