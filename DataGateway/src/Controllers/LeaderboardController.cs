@@ -41,7 +41,7 @@ namespace DataGateway.Controllers
         }
 
         // GET api/<LeaderboardController>/YY-MM-DD
-        [HttpGet("{date}")]
+        [HttpGet("/{date}")]
         public async Task<ActionResult<IEnumerable<LeaderboardSnapshotDto>>> GetSnapshotByDate(DateTime date)
         {
 

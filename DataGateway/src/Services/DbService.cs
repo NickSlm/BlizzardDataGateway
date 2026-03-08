@@ -73,6 +73,7 @@ namespace DataGateway.Services
                         .ToListAsync();
 
             var json = JsonSerializer.Serialize(top10);
+
             await _cacheService.SetAsync(cacheKey, json, TimeSpan.FromMinutes(10));
 
 

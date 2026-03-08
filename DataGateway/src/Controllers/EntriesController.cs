@@ -1,5 +1,6 @@
 ﻿using DataGateway.DTO;
 using DataGateway.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,7 +23,7 @@ namespace DataGateway.Controllers
             _dbService = dbService;
         }
 
-        [HttpGet("snapshot/{snapshotId}")]
+        [HttpGet("/snapshot/{snapshotId}")]
         public async Task<ActionResult<IEnumerable<LeaderboardEntriesDto>>> GetEntries(int snapshotId)
         {
             var entriesList = await _dbService.GetSnapshotEntries(snapshotId);
@@ -42,7 +43,7 @@ namespace DataGateway.Controllers
             return Ok(dtos);
         }
 
-        [HttpGet("character/{characterName}")]
+        [HttpGet("/character/{characterName}")]
         public async Task<ActionResult<LeaderboardEntriesDto>> GetCharacter(string characterName)
         {
             var character = await _dbService.GetCharacter(characterName);
@@ -65,9 +66,9 @@ namespace DataGateway.Controllers
         }
 
         [HttpGet("/leaderboard/top10")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<LeaderboardEntriesDto>>> GetTop10Players()
         {
-
             var top10 = await _dbService.GetTop10Entries();
             var dtos = top10.Select(e => new LeaderboardEntriesDto
             {
