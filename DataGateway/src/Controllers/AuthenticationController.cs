@@ -9,13 +9,23 @@ namespace DataGateway.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        [HttpPost("register")]
-        public async Task<ActionResult> Register([FromBody] RegisterDto registerRequest)
+        [HttpPost("Register")]
+        public async Task<ActionResult> Register([FromBody] UserDto registerRequest)
         {
 
-            //TODO Auth logic
+            //TODO Auth Logic
 
             return Ok(new { message = "User registered successfully" });
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<string>> Login([FromBody] UserDto loginRequest)
+        {
+
+            //TODO Authorization Logic
+
+            string AccessToken = "PlaceHolder";
+            return Ok(AccessToken);
         }
 
     }
