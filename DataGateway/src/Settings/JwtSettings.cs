@@ -1,4 +1,4 @@
-﻿namespace Tracker.Settings
+﻿namespace DataGateway.Settings
 {
     public class JwtSettings
     {

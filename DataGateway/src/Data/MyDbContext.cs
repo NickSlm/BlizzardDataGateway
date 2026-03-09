@@ -1,7 +1,7 @@
 ﻿using DataGateway.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tracker.Data
+namespace DataGateway.Data
 {
     public class MyDbContext: DbContext
     {

@@ -25,7 +25,12 @@ namespace DataGateway.Controllers
             var username = registerRequest.Username;
             var password = registerRequest.Password;
 
+            var result = await _authService.SaveUser(username, password);
 
+            if (!result.success)
+            {
+                return BadRequest(new { message = result.errorMessage });
+            }
 
             return Ok(new { message = "User registered successfully" });
         }

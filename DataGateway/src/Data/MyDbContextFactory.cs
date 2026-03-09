@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tracker.Data
+namespace DataGateway.Data
 {
     public class MyDbContextFactory : IDesignTimeDbContextFactory<MyDbContext>
     {

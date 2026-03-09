@@ -2,7 +2,6 @@
 using DataGateway.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
-using Tracker.Data;
 
 namespace DataGateway.Services
 {

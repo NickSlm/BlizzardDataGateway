@@ -1,10 +1,9 @@
 
 using DataGateway.Data;
+using DataGateway.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Tracker.Data;
-using Tracker.Extensions;
 
-namespace Tracker
+namespace DataGateway
 {
     public class Program
     {

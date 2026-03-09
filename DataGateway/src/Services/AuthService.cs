@@ -19,14 +19,32 @@ namespace DataGateway.Services
         public async Task<(bool success, string? errorMessage)> SaveUser(string username, string password)
         {
 
-            var user = await _dbContext.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
+            var existingUser = await _dbContext.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
 
-            if (user != null)
+            if (existingUser != null)
             {
-                return (false, $"Username {username} already exists!");
+                return (false, $"Username {existingUser} already exists!");
             }
 
-            return (true, null);
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+            var newUser = new User
+            {
+                Username = username,
+                Password = passwordHash
+            };
+
+            _dbContext.Users.Add(newUser);
+
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                return (true, null);
+            }
+            catch (DbUpdateException)
+            {
+                return (false, $"Username {existingUser} already exists!");
+
+            }
         }
     }
 }

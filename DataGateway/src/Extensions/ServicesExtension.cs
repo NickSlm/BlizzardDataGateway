@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tracker.Data;
-using Tracker.Services.Interfaces;
-using Tracker.Settings;
-using Tracker.Services;
 using DataGateway.Services;
 using DataGateway.Services.Interfaces;
 using StackExchange.Redis;
 using DataGateway.Data;
+using DataGateway.Settings;
 
-namespace Tracker.Extensions
+namespace DataGateway.Extensions
 {
     public static class ServicesExtension
     {
@@ -18,7 +15,7 @@ namespace Tracker.Extensions
             Services.AddScoped<IDbService, DbService>();
             Services.AddOptions<JwtSettings>().BindConfiguration("JwtSettings");
             Services.AddScoped<ICacheService, CacheService>();
-            Services.AddSingleton<IAuthService, AuthService>();
+            Services.AddScoped<IAuthService, AuthService>();
         }
         public static void AddDatabaseServices(this IServiceCollection Services)
         {
