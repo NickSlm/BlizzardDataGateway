@@ -21,7 +21,6 @@ namespace DataGateway.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register([FromBody] UserDto registerRequest)
         {
-            //:TODO Auth Logic
             var username = registerRequest.Username;
             var password = registerRequest.Password;
 
@@ -38,10 +37,24 @@ namespace DataGateway.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<string>> Login([FromBody] UserDto loginRequest)
         {
-            //:TODO Authorization Logic
+            var username = loginRequest.Username;
+            var password = loginRequest.Password;
 
-            string AccessToken = "PlaceHolder";
-            return Ok(AccessToken);
+
+            var result = await _authService.LoginUser(username, password);
+
+            if (!result.success)
+            {
+                return Unauthorized("Invalid Credentials");
+            }
+
+
+            return Ok(new
+            {
+                accessToken = result.token,
+                expiresIn = 3600,
+                tokenType = "Bearer"
+            });
         }
 
     }

@@ -4,7 +4,7 @@
     {
 
         Task<(bool success, string? errorMessage)> SaveUser(string username, string password);
-
+        Task<(bool success, string? token)> LoginUser(string username, string password);
 
     }
 }

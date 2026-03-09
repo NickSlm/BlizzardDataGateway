@@ -23,7 +23,7 @@ namespace DataGateway.Services
 
             if (existingUser != null)
             {
-                return (false, $"Username {existingUser} already exists!");
+                return (false, $"Username {existingUser.Username} already exists!");
             }
 
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
@@ -45,6 +45,26 @@ namespace DataGateway.Services
                 return (false, $"Username {existingUser} already exists!");
 
             }
+        }
+
+        public async Task<(bool success, string? token)> LoginUser(string username, string password)
+        {
+
+            var user = await _dbContext.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return (false, null);
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                return (false, null);
+            }
+
+            return (true, "randomToken");
+
+
         }
     }
 }
