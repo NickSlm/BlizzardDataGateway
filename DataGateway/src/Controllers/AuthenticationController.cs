@@ -12,8 +12,9 @@ namespace DataGateway.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register([FromBody] UserDto registerRequest)
         {
-
-            //TODO Auth Logic
+            //:TODO Auth Logic
+            var username = registerRequest.Username;
+            var password = registerRequest.Password;
 
             return Ok(new { message = "User registered successfully" });
         }
@@ -21,8 +22,7 @@ namespace DataGateway.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<string>> Login([FromBody] UserDto loginRequest)
         {
-
-            //TODO Authorization Logic
+            //:TODO Authorization Logic
 
             string AccessToken = "PlaceHolder";
             return Ok(AccessToken);

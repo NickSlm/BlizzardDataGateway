@@ -1,4 +1,5 @@
 
+using DataGateway.Data;
 using Microsoft.EntityFrameworkCore;
 using Tracker.Data;
 using Tracker.Extensions;
@@ -20,6 +21,13 @@ namespace Tracker
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+                usersDb.Database.Migrate();
+            }
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

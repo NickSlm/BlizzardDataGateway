@@ -1,6 +1,6 @@
 ﻿namespace DataGateway.DTO
 {
-    public class RegisterDto
+    public class UserDto
     {
 
         public string Username { get; set; }
