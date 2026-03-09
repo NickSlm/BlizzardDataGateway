@@ -18,6 +18,7 @@ namespace Tracker.Extensions
             Services.AddScoped<IDbService, DbService>();
             Services.AddOptions<JwtSettings>().BindConfiguration("JwtSettings");
             Services.AddScoped<ICacheService, CacheService>();
+            Services.AddSingleton<IAuthService, AuthService>();
         }
         public static void AddDatabaseServices(this IServiceCollection Services)
         {
