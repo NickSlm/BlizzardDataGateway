@@ -1,7 +1,9 @@
 
 using DataGateway.Data;
 using DataGateway.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DataGateway
 {
@@ -16,6 +18,7 @@ namespace DataGateway
             builder.Services.AddAppServices();
             builder.Services.AddApiServices();
             builder.Services.AddDatabaseServices();
+            builder.Services.AddAuthenticationService(builder.Configuration);
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

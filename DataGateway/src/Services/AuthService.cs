@@ -68,8 +68,6 @@ namespace DataGateway.Services
             }
 
             var token = GenerateJWT(user);
-
-
             return (true, token);
 
 

@@ -4,6 +4,9 @@ using DataGateway.Services.Interfaces;
 using StackExchange.Redis;
 using DataGateway.Data;
 using DataGateway.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace DataGateway.Extensions
 {
@@ -36,12 +39,28 @@ namespace DataGateway.Extensions
 
                 return ConnectionMultiplexer.Connect(connectionString);
             });
-
-
         }
         public static void AddApiServices(this IServiceCollection Services)
         {
             Services.AddControllers();
+        }
+        public static void AddAuthenticationService(this IServiceCollection Services, IConfiguration configuration)
+        {
+
+            Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["JwtSettings:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JwtSettings:Audience"],
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
+                    ValidateLifetime = true,
+                };
+            });
         }
     }
 }
