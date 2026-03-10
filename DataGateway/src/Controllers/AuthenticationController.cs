@@ -35,7 +35,7 @@ namespace DataGateway.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<string>> Login([FromBody] UserDto loginRequest)
+        public async Task<ActionResult> Login([FromBody] UserDto loginRequest)
         {
             var username = loginRequest.Username;
             var password = loginRequest.Password;
@@ -47,7 +47,6 @@ namespace DataGateway.Controllers
             {
                 return Unauthorized("Invalid Credentials");
             }
-
 
             return Ok(new
             {
