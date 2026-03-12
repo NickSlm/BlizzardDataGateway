@@ -14,7 +14,8 @@ namespace DataGateway.Extensions
     {
 
         public static void AddAppServices(this IServiceCollection Services)
-        { 
+        {
+            Services.AddSingleton<IRabbitMQService, RabbitMQService>();
             Services.AddScoped<IDbService, DbService>();
             Services.AddOptions<JwtSettings>().BindConfiguration("JwtSettings");
             Services.AddScoped<ICacheService, CacheService>();
@@ -46,10 +47,8 @@ namespace DataGateway.Extensions
         }
         public static void AddAuthenticationService(this IServiceCollection Services, IConfiguration configuration)
         {
-
             Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
