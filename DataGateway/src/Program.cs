@@ -13,7 +13,6 @@ namespace DataGateway
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
             builder.Services.AddAppServices();
             builder.Services.AddApiServices();
@@ -31,7 +30,6 @@ namespace DataGateway
             }
 
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

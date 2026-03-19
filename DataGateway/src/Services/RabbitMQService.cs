@@ -23,7 +23,6 @@ namespace DataGateway.Services
                 HostName = "localhost",
                 UserName = "admin",
                 Password = "admin123"
-
             };
         }
 
